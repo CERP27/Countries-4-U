@@ -16,7 +16,12 @@ router.get('/countries', async(req,res)=>{
     }else{
         try {
             const filteredCountry = await getCountryByName(name)
-            res.status(200).json(filteredCountry)
+            if(filteredCountry.length > 0){
+
+                res.status(200).json(filteredCountry)
+            }else{
+                res.status(404).json({error:`Country not Found`})
+            }
         } catch (error) {
             res.status(404).json({error:`Country not Found`})
         }

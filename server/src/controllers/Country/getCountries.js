@@ -12,7 +12,7 @@ const getCountries = async() =>{
         data.forEach((element) => {
             const country = {
                 id:element.cca3,
-                name:[element.name.common,element.name.official],
+                name:element.name.common,
                 flags:element.flags.png,
                 capital:element.capital ? element.capital[0]: 'No Data',
                 continents:element.continents[0],
@@ -24,7 +24,7 @@ const getCountries = async() =>{
             Country.findOrCreate({
                 where:{
                     id:element.cca3,
-                    name:[element.name.common,element.name.official],
+                    name:element.name.common,
                     flags:element.flags.png,
                     capital:element.capital ? element.capital[0]: 'No Data',
                     continents:element.continents[0],
