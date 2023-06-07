@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     dificulty:{
-      type:DataTypes.ENUM,
+      type:DataTypes.INTEGER,
       values:['1','2','3','4','5'],
       allowNull:false
     },

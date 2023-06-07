@@ -1,7 +1,9 @@
 const { Router } = require("express");
-const {getCountries} = require('../controllers/Country/getCountries');
+const { getCountries } = require('../controllers/Country/getCountries');
 const { getCountryById } = require("../controllers/Country/getCountryById");
 const { getCountryByName } = require("../controllers/Country/getCountryByName");
+const { postActivity } = require("../controllers/Activity/postActivity");
+const { getActivity } = require("../controllers/Activity/getActivity");
 const router = Router();
 
 router.get('/countries', async(req,res)=>{
@@ -27,7 +29,6 @@ router.get('/countries', async(req,res)=>{
         }
     }
 
-
 })
 
 router.get('/countries/:id',async(req,res)=>{
@@ -35,6 +36,26 @@ router.get('/countries/:id',async(req,res)=>{
     try {
         const country = await getCountryById(id)
         res.status(200).json(country)
+    } catch (error) {
+        res.status(500).json({error:error.message})
+    }
+})
+
+router.post('/activities', async(req,res)=>{
+    const{name,dificulty,duration,season,countries} = req.body
+    
+    try {
+        const activity = await postActivity(name,dificulty,duration,season,countries)
+        res.status(200).json(activity)
+    } catch (error) {
+        res.status(500).json({error:error.message})
+    }
+})
+
+router.get('/activities', async(req,res)=>{
+    try {
+        const activities = await getActivity()
+        res.status(200).send(activities)
     } catch (error) {
         res.status(500).json({error:error.message})
     }

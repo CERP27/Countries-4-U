@@ -1,24 +1,22 @@
-const {Activity} = require('../../db')
+const {Activity, Country} = require('../../db')
 
-const postActivity = async(
-    name,dificulty,duration,season,countries
-) => {
+const postActivity = async(name,dificulty,duration,season,countries) => {
     if(!countries) throw Error('You Must Provide a Country')
-
-    const countryList = Array.isArray(countries) ? countries : [countries];
 
     if(![name,dificulty,duration,season].every(Boolean)) throw Error('Missing data')
     
-    countryList.forEach((id))
+    Array.isArray(countries) ? countries : [countries];
 
-    Activity.findOrCreate({where:{
+    const [newActivity,created] = await Activity.findOrCreate({where:{
         name,
         dificulty,
         season,
         duration
     }})
 
+    await newActivity.addCountries(countries)
 
+    return newActivity
 
 }
 

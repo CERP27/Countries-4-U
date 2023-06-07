@@ -35,7 +35,7 @@ const getCountries = async() =>{
             })
             countries.push(country)
         });
-                
+        
         return countries //lo hago asi para que sea mas rapido la respuesta del server
 
     } catch (error) {
