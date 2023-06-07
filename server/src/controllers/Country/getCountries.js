@@ -8,33 +8,34 @@ const getCountries = async() =>{
     try {
         const {data} = await axios(URL)
 
-        let countries=[]
-        data.forEach((element) => {
-            const country = {
-                id:element.cca3,
-                name:element.name.common,
-                flags:element.flags.png,
-                capital:element.capital ? element.capital[0]: 'No Data',
-                continents:element.continents[0],
-                population:element.population,
-                subregion:element.subregion,
-                area:element.area ? element.area.toString() : 'No Data'
-            }
-
-            Country.findOrCreate({
-                where:{
+        let countries = await Promise.all(
+            data.map(async(element)=>{
+                const country = {
                     id:element.cca3,
                     name:element.name.common,
                     flags:element.flags.png,
                     capital:element.capital ? element.capital[0]: 'No Data',
                     continents:element.continents[0],
                     population:element.population,
-                    subregion:element.subregion? element.subregion:'No Data',
+                    subregion:element.subregion,
                     area:element.area ? element.area.toString() : 'No Data'
-                }                
+                }
+    
+                Country.findOrCreate({
+                    where:{
+                        id:element.cca3,
+                        name:element.name.common,
+                        flags:element.flags.png,
+                        capital:element.capital ? element.capital[0]: 'No Data',
+                        continents:element.continents[0],
+                        population:element.population,
+                        subregion:element.subregion? element.subregion:'No Data',
+                        area:element.area ? element.area.toString() : 'No Data'
+                    }                
+                })
+                return country
             })
-            countries.push(country)
-        });
+        )             
         
         return countries //lo hago asi para que sea mas rapido la respuesta del server
 

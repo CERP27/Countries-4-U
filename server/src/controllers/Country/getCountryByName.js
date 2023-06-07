@@ -3,10 +3,6 @@ const {Op} = require('sequelize')
 
 const getCountryByName = async(name)=>{
     
-    let up = name.charAt(0).toUpperCase() + name.slice(1)
-
-    let lc = name.charAt(0).toLowerCase() + name.slice(1)
-
     try {
         const filteredCountry = await Country.findAll({
             where:{
