@@ -10,8 +10,8 @@ const CountryCard = ({id,name,flags,continents})=>{
             </div>
 
             <div>
-                <h2>{name}</h2>
-                <h2>{continents}</h2>
+                <h2>{`${name}`}</h2>
+                <h2>{`${continents}`}</h2>
             </div>
             </Link>
         </div>

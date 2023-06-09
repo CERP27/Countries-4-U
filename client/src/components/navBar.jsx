@@ -41,10 +41,10 @@ const NavBar = ()=>{
             
            
 
-            {
+            {/* {
                 pathname==='/home'?
                 <div>
-                {/* <select name= "continents">
+                <select name= "continents">
                 <option value="Europe">Europe</option>
                 <option value="Oceania">Oceania</option>
                 <option value="Africa">Africa</option>
@@ -53,9 +53,9 @@ const NavBar = ()=>{
                 <option value="North America">North America</option>
                 <option value="Antarctica">Antarctica</option>
                 <option value="All">World</option>
-                </select> */}
+                </select>
                 </div> : null
-            }   
+            }    */}
             
         </div>
     )
