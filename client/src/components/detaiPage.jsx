@@ -26,8 +26,9 @@ const DetailPage = ()=>{
         }
         getCountryId()
     },[])
+    
     country = useSelector(state=>state.country.country)
-    console.log(country)
+    
     
     if(!country) return <h1>Loading</h1>
     return (

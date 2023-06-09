@@ -10,11 +10,11 @@ const LandingPage = ()=>{
         
         <div>
             
-            <h1>LandingPage</h1>           
+            <h1>Countries 4 U</h1>           
             
             <div>
             <Link to='home'>
-            <button>¡Lets get Started!</button>
+            <button>¡Lets get Started✈️!</button>
             </Link>
             </div>
 

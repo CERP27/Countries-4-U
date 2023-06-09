@@ -12,7 +12,7 @@ const SearchBar = ()=>{
         <div>
             <div>
                 <input placeholder="Enter a country's name"  id="input-field" type='search' value={search} onChange={handleChange} />
-                <button>Buscar</button>
+                <button>🔎</button>
             </div>
         </div>
     )
