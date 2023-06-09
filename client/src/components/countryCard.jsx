@@ -1,7 +1,9 @@
+
 import { Link } from "react-router-dom"
 
 const CountryCard = ({id,name,flags,continents})=>{
 
+    
     return (
         <div>
             <Link to={`/details/${id}`}>

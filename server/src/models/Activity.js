@@ -15,12 +15,12 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     dificulty:{
-      type:DataTypes.INTEGER,
+      type:DataTypes.ENUM,
       values:['1','2','3','4','5'],
       allowNull:false
     },
     duration:{
-      type:DataTypes.INTEGER,
+      type:DataTypes.STRING,
     },
     season:{
       type:DataTypes.ENUM,

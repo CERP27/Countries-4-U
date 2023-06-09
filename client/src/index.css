@@ -29,6 +29,11 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  /* background-image: url('./assets/Countrieswallpaper.jpg');
+  background-repeat:no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed; */
 }
 
 h1 {

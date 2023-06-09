@@ -1,16 +1,35 @@
 import './App.css'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {Routes , Route , useLocation , useNavigate} from 'react-router-dom'
+import { getCountries } from './redux/countrySlice';
+import { useSelector, useDispatch } from 'react-redux'
 
 import LandingPage from './components/landingPage'
 import HomePage from './components/homePage'
 import DetailPage from './components/detaiPage'
 import NavBar from './components/navBar'
-
+import ActivityForm from './components/activityForm'
+import axios from 'axios'
 function App() {
   
   const {pathname} = useLocation()
+
+  const dispatch = useDispatch()
+
+  const URL = 'http://localhost:3001/countries'
+
+  useEffect(()=>{
+    const getallCountries= async()=>{
+        try {
+            const {data} = await axios(URL)
+            dispatch(getCountries(data))
+        } catch (error) {
+            throw error.message
+        }
+    }
+    getallCountries();
+  },[])
 
   return (
     <div>
@@ -21,6 +40,7 @@ function App() {
         <Route path='/' element={<LandingPage/>}/>
         <Route path='/home' element={<HomePage/>}/>
         <Route path='/details/:id' element={<DetailPage/>}/>
+        <Route path='/activity' element={<ActivityForm/>}/>
       </Routes>
 
     </div>
