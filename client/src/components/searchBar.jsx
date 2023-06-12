@@ -15,7 +15,7 @@ const SearchBar = ()=>{
 
     const handleChange = (e) =>{
         setSearch(e.target.value)
-        validate()
+        
     }
     
     const validate = ()=>{
@@ -29,26 +29,36 @@ const SearchBar = ()=>{
     }
 
     
-    const handleSearch = async(name)=>{
-        const {data} = await axios(`${URL}?name=${name}`)
+    // const handleSearch = async(name)=>{
+    //     const {data} = await axios(`${URL}?name=${name}`)
 
-        dispatch(getCountryByName(data))
-        setSearch('')
-    }
+    //     dispatch(getCountryByName(data))
+    //     setSearch('')
+    // }
 
     useEffect(()=>{
-        validate()   
+        validate()
+        
+        const handleSearch = async()=>{
+            
+            const {data} = await axios(`${URL}?name=${search}`)
+    
+            dispatch(getCountryByName(data))
+            
+        }
+
+        !error ? handleSearch() : null
     },[search])
 
     return (
         <div>
             <div>
                 <input placeholder="Enter a country's name"  id="input-field" type='search' value={search} onChange={handleChange} />
-                <button onClick={()=>{
+                {/* <button onClick={()=>{
                     if(!error){
                         handleSearch(search)
                     }
-                    }}>🔎</button>
+                    }}>🔎</button> */}
                 {
                     error ? <p>{error}</p> : null
                 }

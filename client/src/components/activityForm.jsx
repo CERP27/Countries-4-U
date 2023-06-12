@@ -1,22 +1,33 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import { getCountries } from '../redux/countrySlice';
+import { getActivities, getCountries } from '../redux/countrySlice';
+import axios from "axios";
+import {useNavigate} from 'react-router-dom'
+import { postActivity } from "../redux/countrySlice";
 
 const ActivityForm = ()=>{
+    const navigate = useNavigate()
+
+    const URL = 'http://localhost:3001/activities'
+
+    const dispatch = useDispatch();
     
-    const countries = useSelector(state=>state.country.countriesForActivityOnly)
+    const countriesForActivityOnly = useSelector(state=>state.country.countriesForActivityOnly)
     
+    const activities = useSelector(state=>state.country.activities)
+
     const [activityData,setActivityData] = useState({
         name:'',
         duration:'',
         dificulty:'',
         season:'',
-        countriesId: []
+        countries: []
     })
     console.log(activityData)
  
     useEffect(()=>{
         validate()
+        
     },[activityData])
     
     const [error,setError] = useState({})
@@ -25,7 +36,7 @@ const ActivityForm = ()=>{
 
         setActivityData({
             ...activityData,
-            [event.target.name]:event.target.name === 'countriesId' ? activityData.countriesId.includes(event.target.value) ? [...activityData.countriesId] : [...activityData.countriesId, event.target.value] : event.target.value
+            [event.target.name]:event.target.name === 'countries' ? activityData.countries.includes(event.target.value) ? [...activityData.countries] : [...activityData.countries, event.target.value] : event.target.value
         })
 
         validate()
@@ -61,9 +72,36 @@ const ActivityForm = ()=>{
         e.preventDefault()
         setActivityData({
             ...activityData,
-            countriesId:activityData.countriesId.filter((country)=> country !== id)
+            countries:activityData.countries.filter((country)=> country !== id)
         })
 
+    }
+
+    const handleSubmit = async(event)=>{
+        event.preventDefault()
+        
+        if(Object.values(error).length===0){
+            
+            
+            
+            try {
+                
+                const {data} = await axios.post(URL,activityData)
+                dispatch(postActivity(data))
+                
+                const info = await axios(URL)
+                console.log(info.data)
+                dispatch(getActivities(info.data))
+                console.log(activities)
+
+                window.alert("¡¡Activity Created!!")
+                dispatch(getActivities(info.data)) && navigate('/home')
+
+
+            } catch (error) {
+                throw error.message
+            }
+        }
     }
 
     return (
@@ -71,7 +109,7 @@ const ActivityForm = ()=>{
 
         <h1>🏂Activity Creator🏄</h1>
 
-        <form>
+        <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="name">Name of Activity: </label><br/>
                 <input required="" type="text" name="name" value={activityData.name} onChange={handleChange} />
@@ -111,10 +149,10 @@ const ActivityForm = ()=>{
             <br/>
             <div>
                 <span>Select a Country: </span><br/>
-                <select name="countriesId" onChange={handleChange}>
+                <select name="countries" onChange={handleChange}>
                     <option disabled selected >...</option>
                 {
-                    countries.map(({id,name})=>{
+                    countriesForActivityOnly.map(({id,name})=>{
                         return(
                             <>
                             <option value={id} key={id+name}>{`${name} (${id})`}</option>                            
@@ -126,10 +164,10 @@ const ActivityForm = ()=>{
             </div>
             <br/>
             <div>
-                {activityData.countriesId.length?<span>Click to delete a country: </span>:null}
+                {activityData.countries.length?<span>Click to delete a country: </span>:null}
                 <br/>
                 {
-                    activityData.countriesId ? activityData.countriesId.map((element)=>{
+                    activityData.countries ? activityData.countries.map((element)=>{
                         return(
                             <>
                             <button onClick={(e)=>handleClick(e,element)}>{element}</button>

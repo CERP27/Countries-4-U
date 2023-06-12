@@ -2,7 +2,7 @@ import './App.css'
 
 import { useState, useEffect } from 'react'
 import {Routes , Route , useLocation , useNavigate} from 'react-router-dom'
-import { getCountries } from './redux/countrySlice';
+import { getCountries, getActivities } from './redux/countrySlice';
 import { useSelector, useDispatch } from 'react-redux'
 
 import LandingPage from './components/landingPage'
@@ -19,16 +19,23 @@ function App() {
 
   const URL = 'http://localhost:3001/countries'
 
+  const URLA = 'http://localhost:3001/activities'
+
   useEffect(()=>{
     const getallCountries= async()=>{
         try {
-            const {data} = await axios(URL)
-            dispatch(getCountries(data))
-        } catch (error) {
-            throw error.message
+          const {data} = await axios(URL)
+          dispatch(getCountries(data))
+    
+          const res= await axios(URLA)
+          dispatch(getActivities(res.data))
+            
+        }catch (error) {
+          throw error.message
         }
     }
     getallCountries();
+
   },[])
 
   return (

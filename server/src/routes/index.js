@@ -43,9 +43,11 @@ router.get('/countries/:id',async(req,res)=>{
 
 router.post('/activities', async(req,res)=>{
     const{name,dificulty,duration,season,countries} = req.body
-    
+    const newName=name.trim().toLowerCase();
+    const newDuration=duration.trim().toLowerCase();
+
     try {
-        const activity = await postActivity(name,dificulty,duration,season,countries)
+        const activity = await postActivity(newName,dificulty,newDuration,season,countries)
         res.status(200).json(activity)
     } catch (error) {
         res.status(500).json({error:error.message})

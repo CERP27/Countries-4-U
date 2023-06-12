@@ -1,18 +1,43 @@
 import { useLocation, Link } from "react-router-dom"
 import { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios'
-import {getCountries, orderByAtoZ, orderByPopulation, filterByContinent} from '../redux/countrySlice'
+import {getCountries, orderByAtoZ, orderByPopulation, filterByContinent, filterByActivity} from '../redux/countrySlice'
 
 import SearchBar from "./searchBar";
 
 const NavBar = ()=>{
+
+    const activities = useSelector(state=>state.country.activities)
+    console.log(activities)
+    // const [activities,setActivities] = useState([])
+
+    const names = activities.map(activity=>{
+        return activity.name
+    })
+    const allactivitiesnames = new Set(names);
+    const activitiesNames= Array.from(allactivitiesnames)
+
+    console.log(activities)
+    console.log(activitiesNames)
+
+
+    // useEffect(()=>{
+    //     const getActivities = async()=>{
+    //         const {data} = await axios(URLA)
+    //         setActivities(data)
+    //     }
+    //     getActivities()
+    // },[])
+
+
     const {pathname} = useLocation()
 
     const dispatch = useDispatch()
 
-    const URL = 'http://localhost:3001/countries'
+    const URLA = 'http://localhost:3001/activities'
 
+    const URL = 'http://localhost:3001/countries'
     
     const getallCountries= async()=>{
         try {
@@ -35,6 +60,16 @@ const NavBar = ()=>{
         event.target.value!=='All' ? dispatch(filterByContinent(event.target.value))
         :getallCountries()
     }
+
+    const handleFilterbyActivity = (event)=>{
+        event.target.value!=='No Activity' ? dispatch(filterByActivity(event.target.value))
+        :getallCountries()
+    }
+
+    // const handlegetActivities = async(event)=>{
+    //     const {data} = await axios(URLA)
+    //     console.log(data)
+    // }
 
     return (
         <div>
@@ -88,7 +123,26 @@ const NavBar = ()=>{
                 <option value="All">World</option>
                 </select>
                 </div> : null
-            }   
+            }
+            
+
+            
+                <div>
+                    {
+                        pathname==='/home' && activitiesNames.length>0 ? 
+                        <select name="activities" onChange={handleFilterbyActivity}>
+                        <option selected disabled>Filter by Activity:</option>
+                        {
+                            activitiesNames.map((name)=>{
+                                return <option value={name}>{name}</option>
+                            })
+                        }           
+                         <option value="No Activity">No Activity</option>
+                        </select>: null
+                    }
+                </div>
+                
+            
             
         </div>
     )
