@@ -50,7 +50,7 @@ const ActivityForm = ()=>{
             errorValidate.name = 'Name must be provided'
         }
 
-        if(activityData.name.length >0 && !isNaN(Number(activityData.name))){
+        if(activityData.name.length > 0 && !isNaN(Number(activityData.name))){
             errorValidate.name = 'Name must contain only characters '
         }
 

@@ -2,6 +2,7 @@ import {  useSelector, useDispatch} from 'react-redux';
 import { orderByAtoZ, orderByPopulation, filterByContinent } from '../redux/countrySlice';
 import CountryCard from './countryCard'
 import { useEffect, useState } from 'react';
+import style from './homePage.module.css'
 
 const countriesPerPage = 10
 
@@ -35,7 +36,7 @@ const HomePage = ()=>{
             
             </div>
 
-            <div>
+            <div className={style.container}>
                 {
                     allcountries.slice(0 + (page * countriesPerPage), countriesPerPage + (page * countriesPerPage)).map(({id,name,continents,flags})=>{
                                 return(

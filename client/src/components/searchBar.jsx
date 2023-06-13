@@ -14,7 +14,9 @@ const SearchBar = ()=>{
     const [error,setError] =useState('')
 
     const handleChange = (e) =>{
-        setSearch(e.target.value)
+        if(/^[a-zA-Z\s]*$/.test(e.target.value)){ //this doesn't allows the target.value to be a number
+            setSearch(e.target.value)
+        }
         
     }
     

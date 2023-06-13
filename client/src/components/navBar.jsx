@@ -9,7 +9,7 @@ import SearchBar from "./searchBar";
 const NavBar = ()=>{
 
     const activities = useSelector(state=>state.country.activities)
-    console.log(activities)
+    
     // const [activities,setActivities] = useState([])
 
     const names = activities.map(activity=>{
@@ -17,10 +17,6 @@ const NavBar = ()=>{
     })
     const allactivitiesnames = new Set(names);
     const activitiesNames= Array.from(allactivitiesnames)
-
-    console.log(activities)
-    console.log(activitiesNames)
-
 
     // useEffect(()=>{
     //     const getActivities = async()=>{
@@ -30,12 +26,9 @@ const NavBar = ()=>{
     //     getActivities()
     // },[])
 
-
     const {pathname} = useLocation()
 
     const dispatch = useDispatch()
-
-    const URLA = 'http://localhost:3001/activities'
 
     const URL = 'http://localhost:3001/countries'
     
@@ -48,6 +41,7 @@ const NavBar = ()=>{
             throw error.message
         }
     }
+
     const handleOrderByAtoZ = (event) =>{
         dispatch(orderByAtoZ(event.target.value))
     }
@@ -74,11 +68,11 @@ const NavBar = ()=>{
     return (
         <div>
             <Link to='/home'>
-                <button onClick={()=>getallCountries()}>🏠</button>
+                <button onClick={()=>getallCountries()}>Home</button>
             </Link>
 
             <Link to='/activity'>
-                <button>Activity</button>
+                <button>Create Activity</button>
             </Link>
 
             <div>
@@ -106,8 +100,7 @@ const NavBar = ()=>{
                 </select>
                 </div> : null
             }       
-           
-
+    
             {
                 pathname==='/home'?
                 <div>
