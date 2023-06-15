@@ -1,9 +1,11 @@
+import { useEffect } from 'react';
+import { useParams } from "react-router-dom"
 import { useDispatch, useSelector} from 'react-redux';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { getCountries, getCountryById } from '../redux/countrySlice';
-import { useParams, Link } from "react-router-dom"
 
+import axios from 'axios';
+
+import { getCountryById } from '../redux/countrySlice';
+import style from './detailPage.module.css'
 
 const DetailPage = ()=>{
 
@@ -29,19 +31,23 @@ const DetailPage = ()=>{
     
     country = useSelector(state=>state.country.country)
     
+    const nepalFlag = country.id === 'NPL'? style.nepalFlag : style.flag
     
-    if(!country) return <h1>Loading</h1>
+    if(!country) return <h1 className={style.loading}>Loading ...</h1>
     return (
         
-        <div>
-            
-            <h1>{`${country.name} ( ${country.id} )`}</h1>
-            <h2>{`Area: ${country.area} Km²`}</h2>
-            <h2>{`Population: ${country.population}`}</h2>
-            <h2>{`Continent: ${country.continents}`}</h2>
-            <h2>{`Sub Region: ${country.subregion}`}</h2>
-            <h2>{`Capital: ${country.capital}`}</h2>
-            <img src={country.flags} alt={country.name} /><br/>
+        <div className={style.details}> 
+            <div>
+                <img src={country.flags} alt={country.name} className={nepalFlag}/><br/>
+            </div>         
+            <div className={style.countryInfo}>            
+                <h1>{`${country.name} ( ${country.id} )`}</h1>
+                <h2>{`Area: ${country.area} Km²`}</h2>
+                <h2>{`Population: ${country.population}`}</h2>
+                <h2>{`Continent: ${country.continents}`}</h2>
+                <h2>{`Sub Region: ${country.subregion}`}</h2>
+                <h2>{`Capital: ${country.capital}`}</h2>
+            </div>
             
         </div>
     )

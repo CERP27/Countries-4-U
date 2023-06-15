@@ -17,7 +17,7 @@ export const countrySlice = createSlice({
             const data = payload;
             state.countries = data;
             state.allCountries = data;
-            state.countriesForActivityOnly=data;
+            state.countriesForActivityOnly = data;
         },
         getCountryById: (state,{payload})=>{
             const data = payload;
@@ -36,19 +36,19 @@ export const countrySlice = createSlice({
             const allCountriesCopy = [...state.allCountries]
             state.allCountries = data ==='A'
             ? allCountriesCopy.sort((a,b) => a.population - b.population)
-            : allCountriesCopy.sort((a,b)=> b.population - a.population)
+            : allCountriesCopy.sort((a,b) => b.population - a.population)
         },
         filterByContinent:(state,{payload})=>{
             const data = payload;
             const allCountriesFilteredContinent = state.countries.filter(country=>country.continents === data)
             state.allCountries = data === 'All'
             ? state.countries
-            :allCountriesFilteredContinent
+            : allCountriesFilteredContinent
         },
         getCountryByName:(state,{payload})=>{
             const data = payload;
             state.countries = data;
-            state.allCountries=data;
+            state.allCountries = data;
         },
         postActivity:(state,{payload})=>{
             const data = payload;
@@ -60,7 +60,7 @@ export const countrySlice = createSlice({
         },
         filterByActivity:(state,{payload})=>{
             const data = payload
-            const activitiesCopy = state.activities.filter(activity => activity.name ===data)
+            const activitiesCopy = state.activities.filter(activity => activity.name === data)
             let countriesID = []
             activitiesCopy.map(activity=> activity.Countries.map(country=> countriesID.push(country.id)))
             const countriesFilteredByActivity = state.countries.filter(country=> countriesID.includes(country.id))

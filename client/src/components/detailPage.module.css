@@ -1,0 +1,54 @@
+.details{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    flex-direction: column;
+}
+
+.loading{
+    font-family: monospace;
+    font-size: 4rem;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+.countryInfo{
+    color: azure;
+    height: fit-content;
+    margin: 5px;
+    background-color: rgba(0, 0, 0, 0.816);
+    border-radius: 30px;
+    font-family: monospace;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.flag{
+    margin-top: 15px;
+    border-radius: 30px;
+    height: 45vh;
+    box-shadow: 8px -8px rgba(0, 0, 0, 0.184);
+}
+
+.nepalFlag{
+    margin-top: 15px;
+    height: 45vh;
+}
+
+@media (min-width: 905px){
+    .details{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        justify-items: center;
+        flex-direction: row;
+    }
+
+    .nepalFlag{
+        
+        height: 50vh;
+    }
+} 

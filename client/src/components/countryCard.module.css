@@ -1,4 +1,4 @@
-.card{
+ .card{
     display: flex;
     align-items: center;
     justify-content: center; 
@@ -8,24 +8,36 @@
     padding-left: 0.5em;
     padding-right: 0.5em;
     border-radius: 2rem;
-    background-color: rgba(0, 0, 0, 0.522);
-    /* border: 2px solid black; */
+    background-color: rgba(0, 0, 0, 0.816);
+}
+
+.loading{
+    font-family: monospace;
+    font-size: 4rem;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
 }
 
 .card h2{
+    font-family: monospace;
+    font-size: 2rem;
     display: flex;
     align-items: center;
+    justify-items: center;
     justify-content: center;
     margin: 0.5em;
     color: rgb(209, 233, 255);
 }
+
 .nameLink{
     text-decoration: none;
 }
-
 
 .cimage{
     margin: 0.5rem;
     border-radius: 30px;
     width: 15rem;
-}
+} 
+

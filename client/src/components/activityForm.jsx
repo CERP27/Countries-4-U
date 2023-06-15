@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { getActivities, getCountries } from '../redux/countrySlice';
+
 import axios from "axios";
-import {useNavigate} from 'react-router-dom'
-import { postActivity } from "../redux/countrySlice";
+
+import { getActivities, postActivity} from '../redux/countrySlice';
+import style from './activityForm.module.css'
 
 const ActivityForm = ()=>{
     const navigate = useNavigate()
@@ -13,8 +15,6 @@ const ActivityForm = ()=>{
     const dispatch = useDispatch();
     
     const countriesForActivityOnly = useSelector(state=>state.country.countriesForActivityOnly)
-    
-    const activities = useSelector(state=>state.country.activities)
 
     const [activityData,setActivityData] = useState({
         name:'',
@@ -23,24 +23,19 @@ const ActivityForm = ()=>{
         season:'',
         countries: []
     })
-    console.log(activityData)
- 
+
     useEffect(()=>{
         validate()
-        
     },[activityData])
     
     const [error,setError] = useState({})
 
     const handleChange = (event) =>{
-
         setActivityData({
             ...activityData,
             [event.target.name]:event.target.name === 'countries' ? activityData.countries.includes(event.target.value) ? [...activityData.countries] : [...activityData.countries, event.target.value] : event.target.value
         })
-
         validate()
-
     }
 
     const validate = ()=>{
@@ -57,6 +52,7 @@ const ActivityForm = ()=>{
         if(isNaN(Number(activityData.duration))){
             errorValidate.duration = 'Duration must be a number '
         }
+
         if(Number(activityData.duration)>120){
             errorValidate.duration = 'Activities can only have a max of 120 Hours'
         }
@@ -74,29 +70,23 @@ const ActivityForm = ()=>{
             ...activityData,
             countries:activityData.countries.filter((country)=> country !== id)
         })
-
     }
 
     const handleSubmit = async(event)=>{
         event.preventDefault()
-        
         if(Object.values(error).length===0){
             
-            
-            
             try {
-                
                 const {data} = await axios.post(URL,activityData)
                 dispatch(postActivity(data))
                 
                 const info = await axios(URL)
-                console.log(info.data)
+                
                 dispatch(getActivities(info.data))
-                console.log(activities)
+                
 
                 window.alert("¡¡Activity Created!!")
                 dispatch(getActivities(info.data)) && navigate('/home')
-
 
             } catch (error) {
                 throw error.message
@@ -105,20 +95,22 @@ const ActivityForm = ()=>{
     }
 
     return (
-        <div>
+        <div className={style.activityForm}>
+
+        <div className={style.form}>
 
         <h1>🏂Activity Creator🏄</h1>
 
         <form onSubmit={handleSubmit}>
-            <div>
+            <div className={style.nameInput}>
                 <label htmlFor="name">Name of Activity: </label><br/>
-                <input required="" type="text" name="name" value={activityData.name} onChange={handleChange} />
+                <input required="" type="text" name="name" value={activityData.name} onChange={handleChange} className={style.nameInp} />
                 {
                     error.name ? <p>{error.name}</p> : null
                 }
             </div>
             <br/>
-            <div>
+            <div className={style.durationInput}>
                 <label>Duration in Hours: </label><br/>
                 <input required="" type="text" name="duration" value={activityData.duration} onChange={handleChange} />
                 {
@@ -126,7 +118,7 @@ const ActivityForm = ()=>{
                 }
             </div>
             <br/>
-            <div>
+            <div className={style.dificultySelect}>
                 <select name="dificulty" onChange={handleChange} >
                     <option disabled selected> Dificulties </option>
                     <option value="1">Very Easy</option>
@@ -137,7 +129,7 @@ const ActivityForm = ()=>{
                 </select>
             </div>
             <br/>
-            <div>
+            <div className={style.seasonSelect}>
                 <select name="season" onChange={handleChange}>
                     <option disabled selected> Seasons </option>
                     <option value="Summer">🕶️Summer🌞</option>
@@ -147,7 +139,7 @@ const ActivityForm = ()=>{
                 </select>
             </div>
             <br/>
-            <div>
+            <div className={style.countrySelect}>
                 <span>Select a Country: </span><br/>
                 <select name="countries" onChange={handleChange}>
                     <option disabled selected >...</option>
@@ -163,9 +155,9 @@ const ActivityForm = ()=>{
                 </select>
             </div>
             <br/>
-            <div>
-                {activityData.countries.length?<span>Click to delete a country: </span>:null}
-                <br/>
+                {activityData.countries.length?<span className={style.countrySpan}>Click to delete a country: </span>:null}
+            <div className={style.countryButtons}>
+                
                 {
                     activityData.countries ? activityData.countries.map((element)=>{
                         return(
@@ -177,10 +169,12 @@ const ActivityForm = ()=>{
                 }
             </div>
             <br/><br/>
-            <div>
+            <div className={style.submit}>
                 <button>Submit Info</button>
             </div>
         </form>
+        </div>
+        
         </div>
     )
 

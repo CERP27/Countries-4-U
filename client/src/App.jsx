@@ -1,16 +1,18 @@
 import './App.css'
 
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import {Routes , Route , useLocation , useNavigate} from 'react-router-dom'
-import { getCountries, getActivities } from './redux/countrySlice';
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
+import axios from 'axios'
+
+import { getCountries, getActivities } from './redux/countrySlice';
 import LandingPage from './components/landingPage'
 import HomePage from './components/homePage'
 import DetailPage from './components/detaiPage'
 import NavBar from './components/navBar'
 import ActivityForm from './components/activityForm'
-import axios from 'axios'
+
 function App() {
   
   const {pathname} = useLocation()
@@ -39,7 +41,7 @@ function App() {
   },[])
 
   return (
-    <div>
+    <div >
 
       {pathname!=='/' ? <NavBar/>:''}
 

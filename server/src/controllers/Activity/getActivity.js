@@ -1,7 +1,9 @@
 const {Activity, Country} = require('../../db')
 
 const getActivity = async()=>{
+
     try {
+
         const activities = await Activity.findAll({
             include:{
                 model:Country,
@@ -10,6 +12,7 @@ const getActivity = async()=>{
                 through:{atributes:[]}
             }}
         )
+        
         return activities
         
     } catch (error) {

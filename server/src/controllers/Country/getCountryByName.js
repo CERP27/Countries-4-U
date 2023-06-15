@@ -1,5 +1,5 @@
-const {Country} = require('../../db')
 const {Op} = require('sequelize')
+const {Country} = require('../../db')
 
 const getCountryByName = async(name)=>{
     

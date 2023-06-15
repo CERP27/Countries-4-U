@@ -19,7 +19,6 @@ router.get('/countries', async(req,res)=>{
         try {
             const filteredCountry = await getCountryByName(name)
             if(filteredCountry.length > 0){
-
                 res.status(200).json(filteredCountry)
             }else{
                 res.status(404).json({error:`Country not Found`})
@@ -42,9 +41,9 @@ router.get('/countries/:id',async(req,res)=>{
 })
 
 router.post('/activities', async(req,res)=>{
-    const{name,dificulty,duration,season,countries} = req.body
-    const newName=name.trim().toLowerCase();
-    const newDuration=duration.trim().toLowerCase();
+    const {name,dificulty,duration,season,countries} = req.body
+    const newName= name.trim().toLowerCase();
+    const newDuration= duration.trim().toLowerCase();
 
     try {
         const activity = await postActivity(newName,dificulty,newDuration,season,countries)
@@ -62,9 +61,6 @@ router.get('/activities', async(req,res)=>{
         res.status(500).json({error:error.message})
     }
 })
-
-
-
 
 
 module.exports = router;

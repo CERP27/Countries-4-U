@@ -1,0 +1,174 @@
+.activityForm{
+    max-width: 60%;
+    background-color: rgba(0, 0, 0, 0.816);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    margin: 5px auto;
+    border-radius: 30px;
+    padding: 1em;
+}
+
+.activityForm h1{
+    display: flex;
+    text-align: center;
+    color: azure;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nameInput{
+    font-family: monospace;
+    color: azure;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.nameInput p{
+    color: red;
+}
+
+.nameInput input{
+    font-family: monospace;
+    font-size: 1rem;
+    width: 170px;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    font-size: small;
+    position: relative;
+    border-radius: 30px;
+    padding: 5px;
+    border: 0;
+    text-overflow: ellipsis;
+    
+}
+
+.durationInput{
+    font-family: monospace;
+    color: azure;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.durationInput p{
+    color: red;
+    text-align: center;
+}
+
+.durationInput input{
+    font-family: monospace;
+    font-size: 40px;
+    width: 170px;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    font-size: small;
+    position: relative;
+    border-radius: 30px;
+    padding: 5px;
+    border: 0;
+    
+}
+
+.dificultySelect{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dificultySelect select{
+    font-family: monospace;
+    text-align: center;
+    width: 8rem;
+    padding: 3px;
+    border-radius: 30px; 
+    appearance: none;
+}
+
+.seasonSelect{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.seasonSelect select{
+    font-family: monospace;
+    text-align: center;
+    width: 8rem;
+    padding: 3px;
+    border-radius: 30px; 
+    appearance: none;
+}
+
+.countrySelect{
+    font-family: monospace;
+    color: azure;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countrySelect select{
+    font-family: monospace;
+    text-align: center;
+    width: 45vw;
+    padding: 3px;
+    border-radius: 30px; 
+    appearance: none;
+    text-overflow: ellipsis;
+}
+
+.countrySpan{
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: azure;
+    font-family: monospace;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.countryButtons{
+    max-width: 75%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 5px;
+}
+
+.countryButtons button{
+    font-family: monospace;
+    font-size: 1rem;
+    padding: 5px;
+    border-radius: 10px;
+    width: 3rem;
+    border: 0;
+}
+
+
+.submit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.submit button{
+    font-family: monospace;
+    font-size: 1rem;
+    padding: 5px;
+    border-radius: 10px;
+    width: 10rem;
+    border: 0;
+}
+

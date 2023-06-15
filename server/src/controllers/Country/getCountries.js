@@ -1,10 +1,10 @@
 const axios = require('axios');
 const {Country} = require('../../db');
-const { where } = require('sequelize');
-
 
 const getCountries = async() =>{
+    
     const URL = 'http://localhost:5000/countries'
+
     try {
         const {data} = await axios(URL)
 
@@ -36,7 +36,6 @@ const getCountries = async() =>{
                 return country
             })
         )             
-        
         return countries //lo hago asi para que sea mas rapido la respuesta del server
 
     } catch (error) {
