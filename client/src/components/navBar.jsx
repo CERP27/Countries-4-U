@@ -116,7 +116,7 @@ const NavBar = ()=>{
                         <option selected disabled>Filter by Activity</option>
                         {
                             activitiesNames.map((name)=>{
-                                return <option value={name}>{name.slice(0,1).toUpperCase()+name.slice(1)}</option>
+                                return <option  key={name} value={name}>{name.slice(0,1).toUpperCase()+name.slice(1)}</option>
                             })
                         }           
                          <option value="No Activity">No Activity</option>

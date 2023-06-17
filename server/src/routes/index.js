@@ -8,6 +8,7 @@ const router = Router();
 
 router.get('/countries', async(req,res)=>{
     const {name} = req.query
+
     if(!name){
         try {
             const allCountries = await getCountries()
@@ -32,6 +33,7 @@ router.get('/countries', async(req,res)=>{
 
 router.get('/countries/:id',async(req,res)=>{
     const {id} = req.params
+    
     try {
         const country = await getCountryById(id)
         res.status(200).json(country)

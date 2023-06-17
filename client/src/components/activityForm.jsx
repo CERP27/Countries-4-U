@@ -8,13 +8,14 @@ import { getActivities, postActivity} from '../redux/countrySlice';
 import style from './activityForm.module.css'
 
 const ActivityForm = ()=>{
+
     const navigate = useNavigate()
 
     const URL = 'http://localhost:3001/activities'
 
     const dispatch = useDispatch();
     
-    const countriesForActivityOnly = useSelector(state=>state.country.countriesForActivityOnly)
+    const countriesForActivityOnly = useSelector(state => state.country.countriesForActivityOnly)
 
     const [activityData,setActivityData] = useState({
         name:'',
@@ -24,12 +25,12 @@ const ActivityForm = ()=>{
         countries: []
     })
 
+    const [error,setError] = useState({})
+
     useEffect(()=>{
         validate()
     },[activityData])
     
-    const [error,setError] = useState({})
-
     const handleChange = (event) =>{
         setActivityData({
             ...activityData,
@@ -45,7 +46,7 @@ const ActivityForm = ()=>{
             errorValidate.name = 'Name must be provided'
         }
 
-        if(activityData.name.length > 0 && !isNaN(Number(activityData.name))){
+        if(activityData.name.length > 0 && !/^[^0-9]*$/.test(activityData.name)){
             errorValidate.name = 'Name must contain only characters '
         }
 
@@ -53,22 +54,22 @@ const ActivityForm = ()=>{
             errorValidate.duration = 'Duration must be a number '
         }
 
-        if(Number(activityData.duration)>120){
+        if(Number(activityData.duration) > 120){
             errorValidate.duration = 'Activities can only have a max of 120 Hours'
         }
 
-        if(Number(activityData.duration)===0){
+        if(Number(activityData.duration) === 0 ){
             errorValidate.duration = ' Activities cant have 0 Hours of duration'
         }
 
         setError(errorValidate)
     }
 
-    const handleClick= (e,id)=>{
-        e.preventDefault()
+    const handleClick= (event,id)=>{
+        event.preventDefault()
         setActivityData({
             ...activityData,
-            countries:activityData.countries.filter((country)=> country !== id)
+            countries: activityData.countries.filter((country) => country !== id)
         })
     }
 
@@ -80,14 +81,12 @@ const ActivityForm = ()=>{
                 const {data} = await axios.post(URL,activityData)
                 dispatch(postActivity(data))
                 
-                const info = await axios(URL)
-                
+                const info = await axios(URL)                
                 dispatch(getActivities(info.data))
                 
-
                 window.alert("¡¡Activity Created!!")
-                dispatch(getActivities(info.data)) && navigate('/home')
-
+                navigate('/home')
+               
             } catch (error) {
                 throw error.message
             }
@@ -102,22 +101,25 @@ const ActivityForm = ()=>{
         <h1>🏂Activity Creator🏄</h1>
 
         <form onSubmit={handleSubmit}>
+            
             <div className={style.nameInput}>
-                <label htmlFor="name">Name of Activity: </label><br/>
+                <label htmlFor="name">Name of Activity:</label><br/>
                 <input required="" type="text" name="name" value={activityData.name} onChange={handleChange} className={style.nameInp} />
                 {
                     error.name ? <p>{error.name}</p> : null
                 }
             </div>
             <br/>
+
             <div className={style.durationInput}>
-                <label>Duration in Hours: </label><br/>
+                <label>Duration in Hours:</label><br/>
                 <input required="" type="text" name="duration" value={activityData.duration} onChange={handleChange} />
                 {
                     error.duration ? <p>{error.duration}</p> : null
                 }
             </div>
             <br/>
+
             <div className={style.dificultySelect}>
                 <select name="dificulty" onChange={handleChange} >
                     <option disabled selected> Dificulties </option>
@@ -129,6 +131,7 @@ const ActivityForm = ()=>{
                 </select>
             </div>
             <br/>
+
             <div className={style.seasonSelect}>
                 <select name="season" onChange={handleChange}>
                     <option disabled selected> Seasons </option>
@@ -139,8 +142,9 @@ const ActivityForm = ()=>{
                 </select>
             </div>
             <br/>
+
             <div className={style.countrySelect}>
-                <span>Select a Country: </span><br/>
+                <span>Select a Country:</span><br/>
                 <select name="countries" onChange={handleChange}>
                     <option disabled selected >...</option>
                 {
@@ -155,7 +159,9 @@ const ActivityForm = ()=>{
                 </select>
             </div>
             <br/>
-                {activityData.countries.length?<span className={style.countrySpan}>Click to delete a country: </span>:null}
+
+            {activityData.countries.length?<span className={style.countrySpan}>Click to delete a country:</span>:null}
+
             <div className={style.countryButtons}>
                 
                 {
@@ -169,9 +175,11 @@ const ActivityForm = ()=>{
                 }
             </div>
             <br/><br/>
+
             <div className={style.submit}>
                 <button>Submit Info</button>
             </div>
+
         </form>
         </div>
         

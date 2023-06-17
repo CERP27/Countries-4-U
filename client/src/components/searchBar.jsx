@@ -17,7 +17,6 @@ const SearchBar = ()=>{
         if(/^[a-zA-Z\s]*$/.test(e.target.value)){ //this doesn't allows the target.value to be a number
             setSearch(e.target.value.trim())
         }
-        
     }
 
     useEffect(()=>{
