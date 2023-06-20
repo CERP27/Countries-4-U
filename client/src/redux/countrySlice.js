@@ -28,7 +28,8 @@ export const countrySlice = createSlice({
             const allCountriesCopy = [...state.allCountries]
             state.allCountries = data ==='A'
             ? allCountriesCopy.sort((a, b) => a.name.localeCompare(b.name))
-            : allCountriesCopy.sort((a, b) => b.name.localeCompare(a.name))
+            : data ==='D' ? allCountriesCopy.sort((a, b) => b.name.localeCompare(a.name))
+            : state.countries
             
         },
         orderByPopulation:(state,{payload})=>{
@@ -36,7 +37,8 @@ export const countrySlice = createSlice({
             const allCountriesCopy = [...state.allCountries]
             state.allCountries = data ==='A'
             ? allCountriesCopy.sort((a,b) => a.population - b.population)
-            : allCountriesCopy.sort((a,b) => b.population - a.population)
+            :data === 'D' ? allCountriesCopy.sort((a,b) => b.population - a.population)
+            : state.countries
         },
         filterByContinent:(state,{payload})=>{
             const data = payload;

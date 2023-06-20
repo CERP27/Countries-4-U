@@ -56,7 +56,7 @@ const NavBar = ()=>{
             <div className={style.buttons}>
 
             <Link to='/home'>
-                <button onClick={()=>getallCountries()} className={style.navBarbutton}>Home</button>
+                <button  className={style.navBarbutton}>Home</button>
             </Link>
             
             </div>
@@ -73,6 +73,7 @@ const NavBar = ()=>{
                         <option selected disabled>Alphabetical Order</option>
                         <option value="A">From A to Z</option>
                         <option value="D">From Z to A</option>
+                        <option value="NOrder">No Order</option>
                         </select>
                     </div> : null
                 }
@@ -82,8 +83,9 @@ const NavBar = ()=>{
                     <div>
                         <select name= "population" onChange={handleOrderByPopulation}>
                         <option selected disabled>Population Order</option>
-                        <option value="A">Population ↑ </option>
+                        <option value="A">Population ↑</option>
                         <option value="D">Population ↓</option>
+                        <option value="NOrder">No Order</option>
                         </select>
                     </div> : null
                 } 

@@ -25,12 +25,12 @@ const HomePage = ()=>{
     const renderPageButtons = () => {
         const startPage = Math.max(0, Math.min(page - Math.floor(visiblePageButtons / 2), totalPages - visiblePageButtons));
         const endPage = Math.min(startPage + visiblePageButtons, totalPages);
-    
+   
         return Array.from({ length: endPage - startPage }).map((_, i) => {
             const pageNumber = startPage + i;
             const buttonClass = pageNumber === page ? style.selectedPageButton : style.pageButton; // Aplica estilos diferentes a la página seleccionada
             return (
-                <button className={buttonClass} type="" key={pageNumber} onClick={() => setPage(pageNumber)}>{pageNumber + 1}</button>
+                <button className={buttonClass} key={pageNumber} onClick={() => setPage(pageNumber)}>{pageNumber + 1}</button>
             );
         });
     };
@@ -42,7 +42,7 @@ const HomePage = ()=>{
                     <button key={'<<'} className={style.pageButton} type="" onClick={() => setPage(0)}>{'<<'}</button>
                 )}
                 {renderPageButtons()}
-                {page < totalPages -1 && (
+                {page < totalPages - 1 && (
                     <button key={'>>'} className={style.pageButton} type="" onClick={() => setPage(totalPages - 1)}>{'>>'}</button>
                 )}
             </div>
