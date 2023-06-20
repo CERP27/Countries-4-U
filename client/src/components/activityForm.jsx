@@ -46,6 +46,10 @@ const ActivityForm = ()=>{
             errorValidate.name = 'Name must be provided'
         }
 
+        if(activityData.name.length >= 50){
+            errorValidate.name = 'Name can only have 50 characters'
+        }
+
         if(activityData.name.length > 0 && !/^[^0-9]*$/.test(activityData.name)){
             errorValidate.name = 'Name must contain only characters '
         }
@@ -88,7 +92,7 @@ const ActivityForm = ()=>{
                 navigate('/home')
                
             } catch (error) {
-                throw error.message
+                throw window.alert("There is an option without data")
             }
         }
     }

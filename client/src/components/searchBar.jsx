@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import axios from 'axios';
 
@@ -13,17 +13,25 @@ const SearchBar = ()=>{
 
     const [search,setSearch] = useState('')
 
+    const [error,setError] = useState('')
+
     const handleChange = (e) =>{
-        if(/^[a-zA-Z\s]*$/.test(e.target.value)){ //this doesn't allows the target.value to be a number
+    
+        if(/^[a-zA-Z\s]*$/.test(e.target.value)){
             setSearch(e.target.value.trim())
         }
     }
 
     useEffect(()=>{
-        
+        setError('')
         const handleSearch = async()=>{
-            const {data} = await axios(`${URL}?name=${search}`)
-            dispatch(getCountryByName(data))
+            try {
+                const {data} = await axios(`${URL}?name=${search}`)
+                dispatch(getCountryByName(data))
+                
+            } catch (error) {
+                setError(error.message)
+            }
         }
 
         handleSearch() 
@@ -31,8 +39,11 @@ const SearchBar = ()=>{
 
     return (
         <div>
-            <div>
+            <div className={style.search}>
                 <input placeholder="Enter a country's name"  id="input-field" type='search' value={search} onChange={handleChange} className={style.searchInput}/>
+                {
+                    error && <p>This name does not match with any country</p>
+                }
             </div>
         </div>
     )

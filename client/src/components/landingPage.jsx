@@ -10,7 +10,7 @@ const LandingPage = ()=>{
             <div className={style.leboton}>
                 <h1 className={style.c4u}>Countries 4 U</h1>
             
-                <Link to='home' className={style.link}>
+                <Link to='/home' className={style.link}>
                     <div>
                         <button className={style.lpbtn}><span className={style.start}>¡Lets get Started✈️!</span></button>
                     </div>   
@@ -20,6 +20,5 @@ const LandingPage = ()=>{
         
     )
 }
-
 
 export default LandingPage

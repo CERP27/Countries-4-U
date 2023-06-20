@@ -25,7 +25,7 @@ router.get('/countries', async(req,res)=>{
                 res.status(404).json({error:`Country not Found`})
             }
         } catch (error) {
-            res.status(404).json({error:`Country not Found`})
+            return res.status(404).json({error:`Country not Found`})
         }
     }
 
@@ -35,10 +35,11 @@ router.get('/countries/:id',async(req,res)=>{
     const {id} = req.params
     
     try {
-        const country = await getCountryById(id)
+        const country = await getCountryById(id.toUpperCase())
         res.status(200).json(country)
     } catch (error) {
-        res.status(500).json({error:error.message})
+        console.log(error.message)
+        return res.status(500).send({error:error.message})
     }
 })
 

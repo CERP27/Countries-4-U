@@ -23,6 +23,7 @@ const DetailPage = ()=>{
                 const {data} = await axios(`${URL}/${id}`)
                 dispatch(getCountryById(data))
             } catch (error) {
+                
                 throw error.message
             }
         }
@@ -30,15 +31,15 @@ const DetailPage = ()=>{
     },[])
     
     country = useSelector(state=>state.country.country)
-    
-    const nepalFlag = country.id === 'NPL'? style.nepalFlag : style.flag
-    
-    if(!country) return <h1 className={style.loading}>Loading ...</h1>
+    console.log(country)
+    if(!country) return(
+        <h1 className={style.error}>There is no country with the Id {id}</h1>
+    ) 
     return (
         
         <div className={style.details}> 
             <div>
-                <img src={country.flags} alt={country.name} className={nepalFlag}/><br/>
+                <img src={country.flags} alt={country.name} className={style.flag}/><br/>
             </div>         
             <div className={style.countryInfo}>            
                 <h1>{`${country.name} ( ${country.id} )`}</h1>

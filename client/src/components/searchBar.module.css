@@ -10,3 +10,15 @@
     border: 0;
     box-shadow: 2px -2px black;
 }
+
+.search p{
+    color: azure;
+    text-align: center;
+    font-family: monospace;
+}
+
+.search{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

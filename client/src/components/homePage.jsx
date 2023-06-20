@@ -39,11 +39,11 @@ const HomePage = ()=>{
         <div>
             <div className={style.pagination}>
                 {page > 0 && (
-                    <button className={style.pageButton} type="" onClick={() => setPage(0)}>{'<<'}</button>
+                    <button key={'<<'} className={style.pageButton} type="" onClick={() => setPage(0)}>{'<<'}</button>
                 )}
                 {renderPageButtons()}
                 {page < totalPages -1 && (
-                    <button className={style.pageButton} type="" onClick={() => setPage(totalPages - 1)}>{'>>'}</button>
+                    <button key={'>>'} className={style.pageButton} type="" onClick={() => setPage(totalPages - 1)}>{'>>'}</button>
                 )}
             </div>
 

@@ -15,7 +15,7 @@ const getCountryByName = async(name)=>{
         return filteredCountry.length>0 ? filteredCountry : new Error('Country not Found');
         
     } catch (error) {
-        throw error;
+        throw error.message;
     }
 
 }

@@ -107,8 +107,6 @@ const NavBar = ()=>{
                     </div> : null
                 }
             
-
-            
                 <div>
                     {
                         pathname==='/home' && activitiesNames.length>0 ? 
