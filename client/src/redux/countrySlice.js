@@ -29,8 +29,7 @@ export const countrySlice = createSlice({
             state.allCountries = data ==='A'
             ? allCountriesCopy.sort((a, b) => a.name.localeCompare(b.name))
             : data ==='D' ? allCountriesCopy.sort((a, b) => b.name.localeCompare(a.name))
-            : state.countries
-            
+            : state.countries 
         },
         orderByPopulation:(state,{payload})=>{
             const data = payload;
@@ -70,7 +69,6 @@ export const countrySlice = createSlice({
             ? state.countries
             : countriesFilteredByActivity
         }   
-
 
     }
 })
