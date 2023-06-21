@@ -9,6 +9,8 @@ import style from './activityForm.module.css'
 
 const ActivityForm = ()=>{
 
+    
+
     const navigate = useNavigate()
 
     const URL = 'http://localhost:3001/activities'
@@ -26,6 +28,8 @@ const ActivityForm = ()=>{
     })
 
     const [error,setError] = useState({})
+
+    const [creating,setCreating] = useState(false)
 
     useEffect(()=>{
         validate()
@@ -83,12 +87,12 @@ const ActivityForm = ()=>{
             
             try {
                 const {data} = await axios.post(URL,activityData)
+                setCreating(true)
                 dispatch(postActivity(data))
-                
                 const info = await axios(URL)                
                 dispatch(getActivities(info.data))
-                
-                window.alert("¡¡Activity Created!!")
+
+                window.alert("¡Activity Created!")
                 navigate('/home')
                
             } catch (error) {
@@ -181,7 +185,7 @@ const ActivityForm = ()=>{
             <br/><br/>
 
             <div className={style.submit}>
-                <button>Submit Info</button>
+                <button disabled={creating}>Submit Info</button>
             </div>
 
         </form>
