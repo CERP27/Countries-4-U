@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import axios from 'axios'
 
-import {getCountries, orderByAtoZ, orderByPopulation, filterByContinent, filterByActivity} from '../redux/countrySlice'
+import {getCountries, orderByAtoZ, orderByPopulation, filterByContinent, filterByActivity, setCurrentPage} from '../redux/countrySlice'
 import SearchBar from "./searchBar";
 import style from './navBar.module.css'
 
@@ -15,6 +15,7 @@ const NavBar = ()=>{
         return activity.name
     })
     const setOfNames = new Set(names);
+
     const activitiesNames= Array.from(setOfNames)
 
     const {pathname} = useLocation()
@@ -34,6 +35,7 @@ const NavBar = ()=>{
     }
 
     const handleOrderByAtoZ = (event) =>{
+
         dispatch(orderByAtoZ(event.target.value))
     }
     
@@ -44,22 +46,25 @@ const NavBar = ()=>{
     const handleFilterbyContinent = (event)=>{
         event.target.value!=='All' ? dispatch(filterByContinent(event.target.value))
         :getallCountries()
+        dispatch(setCurrentPage(0))
     }
 
     const handleFilterbyActivity = (event)=>{
         event.target.value!=='No Activity' ? dispatch(filterByActivity(event.target.value))
         :getallCountries()
+        dispatch(setCurrentPage(0))
     }
 
     return (
         <div className={style.navBar}>
-            <div className={style.buttons}>
-
-            <Link to='/home'>
-                <button  className={style.navBarbutton}>Home</button>
-            </Link>
-            
-            </div>
+            {
+                pathname!=='/home' ?
+                <div className={style.buttons}>
+                <Link to='/home'>
+                    <button  className={style.navBarbutton} onClick={handleBackToHome}>Home</button>
+                </Link>
+                </div> : null
+            }
 
             <div className={style.search}>
                 {pathname==='/home' ? <SearchBar/> : null}
@@ -83,8 +88,8 @@ const NavBar = ()=>{
                     <div>
                         <select name= "population" onChange={handleOrderByPopulation}>
                         <option selected disabled>Population Order</option>
-                        <option value="A">Population ↑</option>
-                        <option value="D">Population ↓</option>
+                        <option value="A">Population ↓</option>
+                        <option value="D">Population ↑</option>
                         <option value="NOrder">No Order</option>
                         </select>
                     </div> : null
@@ -130,7 +135,7 @@ const NavBar = ()=>{
                 <Link to='/activity'>
                     <button className={style.navBarbutton}>Create Activity</button>
                 </Link>
-            </div>:null
+            </div> : null
             } 
         </div>
     )

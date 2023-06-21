@@ -17,11 +17,11 @@ const getCountries = async() =>{
                     capital:element.capital ? element.capital[0]: 'No Data',
                     continents:element.continents[0],
                     population:element.population,
-                    subregion:element.subregion,
+                    subregion:element.subregion? element.subregion:'No Data',
                     area:element.area ? element.area.toString() : 'No Data'
                 }
     
-                Country.findOrCreate({
+                await Country.findOrCreate({
                     where:{
                         id:element.cca3,
                         name:element.name.common,
@@ -36,7 +36,7 @@ const getCountries = async() =>{
                 return country
             })
         )             
-        return countries //lo hago asi para que sea mas rapido la respuesta del server
+        return countries 
 
     } catch (error) {
         return error

@@ -9,6 +9,16 @@
     margin: 1em;
 }
 
+.loading{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-family: monospace;
+    font-size: 2rem;
+    margin-top: 5px;
+    color:rgb(37, 36, 34)
+}
+
 .pagination{
     display: flex;
     flex-wrap: wrap;

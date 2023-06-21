@@ -1,0 +1,6 @@
+.badRoute h1{
+    display: flex;
+    justify-content: center;
+    font-family: monospace;
+    font-size: 2.5rem;
+}

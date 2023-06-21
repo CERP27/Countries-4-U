@@ -6,7 +6,8 @@ const initialState = {
     countriesForActivityOnly:[],
     country:{},
     activity:{},
-    activities:[]
+    activities:[],
+    currentPage:0
 }
 
 export const countrySlice = createSlice({
@@ -68,11 +69,26 @@ export const countrySlice = createSlice({
             state.allCountries = data === 'No Activity'
             ? state.countries
             : countriesFilteredByActivity
-        }   
+        },
+        setCurrentPage:(state,{payload})=>{
+            const data = payload;
+            state.currentPage = data
+        }
 
     }
 })
 
 
-export const {getCountries, getCountryById, getCountryByName,postActivity, orderByAtoZ, orderByPopulation, filterByContinent,getActivities,filterByActivity} = countrySlice.actions;
+export const {
+    getCountries,
+    getCountryById, 
+    getCountryByName,
+    postActivity, 
+    orderByAtoZ, 
+    orderByPopulation, 
+    filterByContinent,
+    getActivities,
+    filterByActivity, 
+    setCurrentPage
+} = countrySlice.actions;
 export default countrySlice.reducer;

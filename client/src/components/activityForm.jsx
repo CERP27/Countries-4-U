@@ -9,8 +9,6 @@ import style from './activityForm.module.css'
 
 const ActivityForm = ()=>{
 
-    
-
     const navigate = useNavigate()
 
     const URL = 'http://localhost:3001/activities'
@@ -54,7 +52,7 @@ const ActivityForm = ()=>{
             errorValidate.name = 'Name can only have 50 characters'
         }
 
-        if(activityData.name.length > 0 && !/^[^0-9]*$/.test(activityData.name)){
+        if(activityData.name.length > 0 && !/^[a-zA-Z\s]*$/.test(activityData.name)){
             errorValidate.name = 'Name must contain only characters '
         }
 
@@ -84,10 +82,10 @@ const ActivityForm = ()=>{
     const handleSubmit = async(event)=>{
         event.preventDefault()
         if(Object.values(error).length===0){
+            setCreating(true)
             
             try {
                 const {data} = await axios.post(URL,activityData)
-                setCreating(true)
                 dispatch(postActivity(data))
                 const info = await axios(URL)                
                 dispatch(getActivities(info.data))
@@ -96,6 +94,7 @@ const ActivityForm = ()=>{
                 navigate('/home')
                
             } catch (error) {
+                setCreating(false)
                 throw window.alert("There is an option without data")
             }
         }

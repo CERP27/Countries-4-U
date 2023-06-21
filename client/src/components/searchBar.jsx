@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import axios from 'axios';
 
-import {getCountryByName} from '../redux/countrySlice'
+import { getCountryByName } from '../redux/countrySlice'
 import style from './searchBar.module.css'
 
 const SearchBar = ()=>{

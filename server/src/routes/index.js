@@ -38,7 +38,6 @@ router.get('/countries/:id',async(req,res)=>{
         const country = await getCountryById(id.toUpperCase())
         res.status(200).json(country)
     } catch (error) {
-        console.log(error.message)
         return res.status(500).send({error:error.message})
     }
 })
