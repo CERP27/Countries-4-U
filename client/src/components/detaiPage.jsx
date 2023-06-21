@@ -31,7 +31,7 @@ const DetailPage = ()=>{
     },[])
     
     country = useSelector(state=>state.country.country)
-    console.log(country)
+    
     if(!country) return(
         <h1 className={style.error}>There is no country with the Id {id}</h1>
     ) 

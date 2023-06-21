@@ -61,7 +61,7 @@ const NavBar = ()=>{
                 pathname!=='/home' ?
                 <div className={style.buttons}>
                 <Link to='/home'>
-                    <button  className={style.navBarbutton} onClick={handleBackToHome}>Home</button>
+                    <button  className={style.navBarbutton} >Home</button>
                 </Link>
                 </div> : null
             }
