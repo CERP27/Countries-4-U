@@ -60,8 +60,8 @@ const ActivityForm = ()=>{
             errorValidate.duration = 'Duration must be a number '
         }
 
-        if(Number(activityData.duration) > 120){
-            errorValidate.duration = 'Activities can only have a max of 120 Hours'
+        if(Number(activityData.duration) > 120 && Number(activityData.duration)<0){
+            errorValidate.duration = 'Activities can only have a max of 120 Hours nor can have negative numbers'
         }
 
         if(Number(activityData.duration) === 0 ){
